@@ -12,14 +12,7 @@ var neo4j = require('node-neo4j');
 
 var app = express();
 
-var db = new neo4j('http://localhost:7474');
 
-db.cypherQuery("CREATE (t:Tweet {text:'Test tweet'}) RETURN t;", function(err, result){
-    if(err) throw err;
-
-    console.log(result.data); // delivers an array of query results
-    console.log(result.columns); // delivers an array of names of objects getting returned
-});
 
 // all environments
 app.set('port', process.env.PORT || 3000);

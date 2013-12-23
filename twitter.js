@@ -1,7 +1,9 @@
 //Functionality for integrating with the twitter API
 
-var Twit = require('twit')
-var config = require('./config.js')
+var Twit = require('twit');
+var config = require('./config.js');
+
+var neo4j = require('node-neo4j');
 
 config.setup();
 
@@ -11,6 +13,39 @@ var T = new Twit({
   , access_token:         process.env.TWITTER_ACCESS_TOKEN
   , access_token_secret:  process.env.TWITTER_ACCESS_SECRET
 })
+
+var db = new neo4j('http://localhost:7474');
+
+
+var stream = T.stream('statuses/filter', { track: ['#icestorm'], language: 'en' })
+
+stream.on('tweet', function (tweet) {
+
+  var clean = function (text) {
+    text = text || '';
+    return text.replace(/\'/g, "\\'").replace(/[^a-zA-Z0-9 #@.,:\/]/g,'');;
+  };
+
+  var neo4jquery = "CREATE (t:Tweet {id:'" + tweet.id + "', created_at:'" + tweet.created_at + "', text:'" + clean(tweet.text) + "'}) " + 
+  "MERGE (a:Author {id:'" + tweet.user.id + "', name:'" + clean(tweet.user.name) + "', screen_name:'" + clean(tweet.user.screen_name) + "', description:'" + clean(tweet.user.description) + 
+    "', profile_image_url:'" + clean(tweet.user.profile_image_url) + "'}) CREATE (a)-[:TWEETED]->(t)";
+   tweet.entities.hashtags.forEach(function(hashtag, index) {
+     neo4jquery += 'MERGE (h' + index.toString() + ':Hashtag {name:"' + clean(hashtag.text) + '"}) CREATE (h' + index.toString() + ')-[:INCLUDES]->(t) CREATE (a)-[:MENTIONS]->(h' + index.toString() + ') CREATE (h' + index.toString() + ')-[:PARTICIPANT]->(a)'
+   });
+  neo4jquery += ';';
+
+  console.log(neo4jquery);
+  db.cypherQuery(neo4jquery, function(err, result){
+      if(err) throw err;
+
+      console.log(result.data); // delivers an array of query results
+      console.log(result.columns); // delivers an array of names of objects getting returned
+  });  
+
+});
+
+
+
 
 //
 //  stream a sample of public statuses
@@ -35,11 +70,7 @@ var T = new Twit({
 //
 // filter the public stream by english tweets containing `#apple`
 //
-var stream = T.stream('statuses/filter', { track: ['samsung'], language: 'en' })
 
-stream.on('tweet', function (tweet) {
-  console.log(tweet.user.screen_name + ': ' + tweet.text);
-})
 
 //
 //  tweet 'hello world!'
