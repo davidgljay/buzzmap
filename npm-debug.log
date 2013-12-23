@@ -1,0 +1,756 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/0.10.20/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@1.3.11
+3 info using node@v0.10.20
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/Users/davidgljay/Sites/buzzmap',
+5 verbose install   [ 'express', 'jade', 'stylus', 'twit', 'node-neo4j' ] ]
+6 info preinstall Buzzmap@0.0.1
+7 verbose readDependencies using package.json deps
+8 verbose already installed skipping jade@* /Users/davidgljay/Sites/buzzmap
+9 verbose already installed skipping stylus@* /Users/davidgljay/Sites/buzzmap
+10 verbose already installed skipping twit@1.1.11 /Users/davidgljay/Sites/buzzmap
+11 verbose cache add [ 'node-neo4j@1.0.5', null ]
+12 verbose cache add name=undefined spec="node-neo4j@1.0.5" args=["node-neo4j@1.0.5",null]
+13 verbose parsed url { protocol: null,
+13 verbose parsed url   slashes: null,
+13 verbose parsed url   auth: null,
+13 verbose parsed url   host: null,
+13 verbose parsed url   port: null,
+13 verbose parsed url   hostname: null,
+13 verbose parsed url   hash: null,
+13 verbose parsed url   search: null,
+13 verbose parsed url   query: null,
+13 verbose parsed url   pathname: 'node-neo4j@1.0.5',
+13 verbose parsed url   path: 'node-neo4j@1.0.5',
+13 verbose parsed url   href: 'node-neo4j@1.0.5' }
+14 verbose cache add name="node-neo4j" spec="1.0.5" args=["node-neo4j","1.0.5"]
+15 verbose parsed url { protocol: null,
+15 verbose parsed url   slashes: null,
+15 verbose parsed url   auth: null,
+15 verbose parsed url   host: null,
+15 verbose parsed url   port: null,
+15 verbose parsed url   hostname: null,
+15 verbose parsed url   hash: null,
+15 verbose parsed url   search: null,
+15 verbose parsed url   query: null,
+15 verbose parsed url   pathname: '1.0.5',
+15 verbose parsed url   path: '1.0.5',
+15 verbose parsed url   href: '1.0.5' }
+16 verbose addNamed [ 'node-neo4j', '1.0.5' ]
+17 verbose addNamed [ '1.0.5', '1.0.5' ]
+18 verbose already installed skipping express@3.4.4 /Users/davidgljay/Sites/buzzmap
+19 silly lockFile fa620b14-node-neo4j-1-0-5 node-neo4j@1.0.5
+20 verbose lock node-neo4j@1.0.5 /Users/davidgljay/.npm/fa620b14-node-neo4j-1-0-5.lock
+21 verbose url raw node-neo4j/1.0.5
+22 verbose url resolving [ 'https://registry.npmjs.org/', './node-neo4j/1.0.5' ]
+23 verbose url resolved https://registry.npmjs.org/node-neo4j/1.0.5
+24 info trying registry request attempt 1 at 23:12:57
+25 verbose etag "4WK42DNH7ZSR00UWYDK0Z7FE7"
+26 http GET https://registry.npmjs.org/node-neo4j/1.0.5
+27 http 304 https://registry.npmjs.org/node-neo4j/1.0.5
+28 silly registry.get cb [ 304,
+28 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+28 silly registry.get     etag: '"4WK42DNH7ZSR00UWYDK0Z7FE7"',
+28 silly registry.get     date: 'Mon, 23 Dec 2013 04:12:58 GMT',
+28 silly registry.get     'content-length': '0' } ]
+29 verbose etag node-neo4j/1.0.5 from cache
+30 silly lockFile fa620b14-node-neo4j-1-0-5 node-neo4j@1.0.5
+31 silly lockFile fa620b14-node-neo4j-1-0-5 node-neo4j@1.0.5
+32 silly resolved [ { author:
+32 silly resolved      { name: 'Philipp Küng',
+32 silly resolved        email: 'git@philippkueng.ch',
+32 silly resolved        url: 'http://philippkueng.ch' },
+32 silly resolved     name: 'node-neo4j',
+32 silly resolved     description: 'Neo4j REST API wrapper for Node.js',
+32 silly resolved     version: '1.0.5',
+32 silly resolved     repository:
+32 silly resolved      { type: 'git',
+32 silly resolved        url: 'https://github.com/philippkueng/node-neo4j.git' },
+32 silly resolved     main: 'main.js',
+32 silly resolved     scripts: { test: 'mocha -R spec -t 10000' },
+32 silly resolved     engines: { node: '~ 0.10.15' },
+32 silly resolved     dependencies: { superagent: '0.15.5', step: '0.0.5' },
+32 silly resolved     devDependencies: { mocha: '1.13.0', should: '2.0.1' },
+32 silly resolved     licenses: [ [Object] ],
+32 silly resolved     keywords: [ 'neo4j', 'graph', 'database' ],
+32 silly resolved     contributors: [ [Object], [Object] ],
+32 silly resolved     readme: '# Neo4j REST API wrapper for Node.js\n\n---\n\n## Installation\n\n    npm install node-neo4j\n\n## Usage\n\nIn order to use the library you either have to create a [heroku](http://www.heroku.com/) app and add the [Neo4j Addon](https://addons.heroku.com/neo4j) there or install it locally.<br/>If you\'re using OS X i highly recommend installing Neo4j via [Homebrew](http://mxcl.github.com/homebrew/).\n\n    $ brew install neo4j\n    $ neo4j start\n\n**Instantiate a wrapper instance**\n\n    var neo4j = require(\'node-neo4j\');\n    db = new neo4j(\'http://username:password@domain:port\');\n\n\n### Node operations\n        \n**Insert a Node**\n\n    db.insertNode({\n        name: \'Darth Vader\',\n        sex: \'male\'\n    },function(err, node){\n        if(err) throw err;\n        \n        // Output node properties.\n        console.log(node.data);\n        \n        // Output node id.\n        console.log(node.id);\n    });\n\n**Read a Node**\n\n    db.readNode(12, function(err, node){\n        if(err) throw err;\n    \n        // Output node properties.\n        console.log(node.data);\n       \n        // Output node id.\n        console.log(node.id);\n    });\n\n**Update a Node**\n\nWill remove any assigned properties and replace them with the ones given below.\n\n    db.updateNode(12, {name:\'foobar2\'}, function(err, node){\n        if(err) throw err;\n\n        if(node === true){\n            // node updated\n        } else {\n            // node not found, hence not updated\n        }\n    });\n        \n**Delete a Node**\n\n    db.deleteNode(12, function(err, node){\n        if(err) throw err;\n       \n        if(node === true){\n            // node deleted\n        } else {\n            // node not deleted because not found or because of existing relationships\n        }\n    });\n\n\n### Relationship operations\n\n**Insert a Relationship**\n\n    db.insertRelationship(root_node_id, other_node_id, \'RELATIONSHIP_TYPE\', {\n        age: \'5 years\',\n        sideeffects: {\n            positive: \'happier\',\n            negative: \'less time\'\n        }}, function(err, relationship){\n            if(err) throw err;\n\n            // Output relationship properties.\n            console.log(relationship.data);\n\n            // Output relationship id.\n            console.log(relationship.id);\n\n            // Output relationship start_node_id.\n            console.log(relationship.start_node_id);\n\n            // Output relationship end_node_id.\n            console.log(relationship.end_node_id);\n    });\n\n**Read a Relationship**\n\n    db.readRelationship(relationship_id, function(err, relationship){\n        if(err) throw err;\n\n        // Same properties for relationship object as with InsertRelationship\n    });\n\n**Update a Relationship**\n\nWill remove any assigned properties and replace them with the ones given below.\n\n    db.updateRelationship(relationship_id, {\n            age: \'6 years\'\n        }, function(err, relationship){\n            if(err) throw err;\n\n            if(relationship === true){\n                // relationship updated\n            } else {\n                relationship not found, hence not updated.\n            }\n    });\n\n**Delete a Relationship**\n\n    db.deleteRelationship(relationship_id, function(err, relationship){\n        if(err) throw err;\n\n        if(relationship === true){\n            // relationship deleted\n        } else {\n            // relationship not deleted because not found.\n        }\n    });\n\n\n### Index operations\n\nThis documentation only contains calls to Node specific index functions however to call those functions for Relationships, just replace `Node` with `Relationship`.\n\n**Insert an Index**\n\n    db.insertNodeIndex(\'the_index_name\', function(err, result){\n        if (err) throw err;\n\n        console.log(result); // return the index template and configuration\n    });\n\n    // insert an index with a custom configuration\n    db.insertNodeIndex({\n        index: \'the_index_name\',\n        config: {\n            type: \'fulltext\',\n            provider: \'lucene\'\n        }\n    }, function(err, result){\n        if (err) throw err;\n\n        console.log(result); // return the index template with its custom configuration\n    });\n\n**Delete an Index**\n\n    db.deleteNodeIndex(\'the_index_name\', function(err, result){\n        if (err) throw err;\n\n        console.log(result) // will be true, if the deletion is successful\n    });\n\n**List all Indexes**\n\n    db.listNodeIndexes(function(err, result){\n        if (err) throw err;\n\n        console.log(result); // an object with all indexes and their templates and configurations\n    });\n\t\t\n**Add a node to an index**\n\n    db.addNodeToIndex(node_id, \'the_index_name\', \'an_indexed_key\', \'an_indexed_value\', function(err, result){\n        if (err) throw err;\n        \n        console.log(result); // will return the index \n    });\n\n### Advanced relationship operations\n\n**Get all relationship types used within the Neo4j database**\n\nWill also return types of those relationships that have been deleted.\n\n    db.readRelationshipTypes(function(err, result){\n        if(err) throw err;\n\n        console.log(result); // eg. [\'RELATED_TO\', \'LOVES\', \'KNOWNS\']\n    });\n\n**Get all relationships of a node**\n\nWill return incoming aswell as outgoing nodes.\n\n    db.readAllRelationshipsOfNode(node_id, function(err, relationships){\n        if(err) throw err;\n\n        console.log(relationships); // delivers an array of relationship objects.\n    });\n\n**Get all incoming relationships of a node**\n\n    db.readIncomingRelationshipsOfNode(node_id, function(err, relationships){\n        if(err) throw err;\n\n        console.log(relationships); // delivers an array of relationships objects.\n    });\n\n**Get all outgoing relationships of a node**\n\n    db.readOutgoingRelationshipsOfNode(node_id, function(err, relationships){\n        if(err) throw err;\n\n        console.log(relationships); // delivers an array of relationships objects.\n    });\n\n**Run a cyper query against Neo4j**\n\n    db.cypherQuery("START user = node(123) MATCH user-[:RELATED_TO]->friends RETURN friends", function(err, result){\n        if(err) throw err;\n\n        console.log(result.data); // delivers an array of query results\n        console.log(result.columns); // delivers an array of names of objects getting returned\n    });\n\n**Run a batch query against Neo4j**\n\nFor more information about what queries are possible checkout the [Neo4j REST API documentation](http://docs.neo4j.org/chunked/stable/rest-api-batch-ops.html).\n\n    db.batchQuery([\n        {\n            method: "GET",\n            to: "/node/100",\n            id: 0\n        },{\n            method: "GET",\n            to: "/node/102",\n            id: 1\n        }\n    ], function(err, result){\n        if(err) throw err;\n\n        console.log(result); // delivers an array of query results\n    });\n\n## Tests\n\nThis API wrapper relies on [mocha](https://github.com/visionmedia/mocha) for testing, therefore when you want to run the tests follow the steps below.\n\n    $ git clone git://github.com/philippkueng/node-neo4j.git\n    $ cd node-neo4j/\n    $ npm install\n    $ npm test\n\n## Issues or Feature Requests?\n\nIn case you run into an issue while using the wrapper or you have a feature request please let me know by [creating a new issue](https://github.com/philippkueng/node-neo4j/issues) or contacting me via [twitter](https://twitter.com/philippkueng).\n\n## License\n\nCopyright (C) 2012 Philipp Küng\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n',
+32 silly resolved     readmeFilename: 'README.md',
+32 silly resolved     bugs: { url: 'https://github.com/philippkueng/node-neo4j/issues' },
+32 silly resolved     _id: 'node-neo4j@1.0.5',
+32 silly resolved     _from: 'node-neo4j@1.0.5' } ]
+33 info install node-neo4j@1.0.5 into /Users/davidgljay/Sites/buzzmap
+34 info installOne node-neo4j@1.0.5
+35 info /Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j unbuild
+36 verbose tar unpack /Users/davidgljay/.npm/node-neo4j/1.0.5/package.tgz
+37 silly lockFile 407dcdce--buzzmap-node-modules-node-neo4j tar:///Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j
+38 verbose lock tar:///Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j /Users/davidgljay/.npm/407dcdce--buzzmap-node-modules-node-neo4j.lock
+39 silly lockFile 923aed9d-npm-node-neo4j-1-0-5-package-tgz tar:///Users/davidgljay/.npm/node-neo4j/1.0.5/package.tgz
+40 verbose lock tar:///Users/davidgljay/.npm/node-neo4j/1.0.5/package.tgz /Users/davidgljay/.npm/923aed9d-npm-node-neo4j-1-0-5-package-tgz.lock
+41 silly gunzTarPerm modes [ '755', '644' ]
+42 silly gunzTarPerm extractEntry package.json
+43 silly gunzTarPerm extractEntry README.md
+44 silly gunzTarPerm extractEntry main.js
+45 silly gunzTarPerm extractEntry Makefile
+46 silly gunzTarPerm extractEntry test/test.main.js
+47 silly lockFile 407dcdce--buzzmap-node-modules-node-neo4j tar:///Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j
+48 silly lockFile 407dcdce--buzzmap-node-modules-node-neo4j tar:///Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j
+49 silly lockFile 923aed9d-npm-node-neo4j-1-0-5-package-tgz tar:///Users/davidgljay/.npm/node-neo4j/1.0.5/package.tgz
+50 silly lockFile 923aed9d-npm-node-neo4j-1-0-5-package-tgz tar:///Users/davidgljay/.npm/node-neo4j/1.0.5/package.tgz
+51 info preinstall node-neo4j@1.0.5
+52 verbose readDependencies using package.json deps
+53 verbose readDependencies using package.json deps
+54 verbose cache add [ 'superagent@0.15.5', null ]
+55 verbose cache add name=undefined spec="superagent@0.15.5" args=["superagent@0.15.5",null]
+56 verbose parsed url { protocol: null,
+56 verbose parsed url   slashes: null,
+56 verbose parsed url   auth: null,
+56 verbose parsed url   host: null,
+56 verbose parsed url   port: null,
+56 verbose parsed url   hostname: null,
+56 verbose parsed url   hash: null,
+56 verbose parsed url   search: null,
+56 verbose parsed url   query: null,
+56 verbose parsed url   pathname: 'superagent@0.15.5',
+56 verbose parsed url   path: 'superagent@0.15.5',
+56 verbose parsed url   href: 'superagent@0.15.5' }
+57 verbose cache add name="superagent" spec="0.15.5" args=["superagent","0.15.5"]
+58 verbose parsed url { protocol: null,
+58 verbose parsed url   slashes: null,
+58 verbose parsed url   auth: null,
+58 verbose parsed url   host: null,
+58 verbose parsed url   port: null,
+58 verbose parsed url   hostname: null,
+58 verbose parsed url   hash: null,
+58 verbose parsed url   search: null,
+58 verbose parsed url   query: null,
+58 verbose parsed url   pathname: '0.15.5',
+58 verbose parsed url   path: '0.15.5',
+58 verbose parsed url   href: '0.15.5' }
+59 verbose addNamed [ 'superagent', '0.15.5' ]
+60 verbose addNamed [ '0.15.5', '0.15.5' ]
+61 silly lockFile 995bea5d-superagent-0-15-5 superagent@0.15.5
+62 verbose lock superagent@0.15.5 /Users/davidgljay/.npm/995bea5d-superagent-0-15-5.lock
+63 verbose cache add [ 'step@0.0.5', null ]
+64 verbose cache add name=undefined spec="step@0.0.5" args=["step@0.0.5",null]
+65 verbose parsed url { protocol: null,
+65 verbose parsed url   slashes: null,
+65 verbose parsed url   auth: null,
+65 verbose parsed url   host: null,
+65 verbose parsed url   port: null,
+65 verbose parsed url   hostname: null,
+65 verbose parsed url   hash: null,
+65 verbose parsed url   search: null,
+65 verbose parsed url   query: null,
+65 verbose parsed url   pathname: 'step@0.0.5',
+65 verbose parsed url   path: 'step@0.0.5',
+65 verbose parsed url   href: 'step@0.0.5' }
+66 verbose cache add name="step" spec="0.0.5" args=["step","0.0.5"]
+67 verbose parsed url { protocol: null,
+67 verbose parsed url   slashes: null,
+67 verbose parsed url   auth: null,
+67 verbose parsed url   host: null,
+67 verbose parsed url   port: null,
+67 verbose parsed url   hostname: null,
+67 verbose parsed url   hash: null,
+67 verbose parsed url   search: null,
+67 verbose parsed url   query: null,
+67 verbose parsed url   pathname: '0.0.5',
+67 verbose parsed url   path: '0.0.5',
+67 verbose parsed url   href: '0.0.5' }
+68 verbose addNamed [ 'step', '0.0.5' ]
+69 verbose addNamed [ '0.0.5', '0.0.5' ]
+70 silly lockFile 04a7067c-step-0-0-5 step@0.0.5
+71 verbose lock step@0.0.5 /Users/davidgljay/.npm/04a7067c-step-0-0-5.lock
+72 verbose url raw superagent/0.15.5
+73 verbose url resolving [ 'https://registry.npmjs.org/', './superagent/0.15.5' ]
+74 verbose url resolved https://registry.npmjs.org/superagent/0.15.5
+75 info trying registry request attempt 1 at 23:12:58
+76 verbose etag "7J60WRJAL2O8QWCA2AM1WGMES"
+77 http GET https://registry.npmjs.org/superagent/0.15.5
+78 verbose url raw step/0.0.5
+79 verbose url resolving [ 'https://registry.npmjs.org/', './step/0.0.5' ]
+80 verbose url resolved https://registry.npmjs.org/step/0.0.5
+81 info trying registry request attempt 1 at 23:12:58
+82 verbose etag "P8FVCJKIBIM0YGAF0NOUZN1U"
+83 http GET https://registry.npmjs.org/step/0.0.5
+84 http 304 https://registry.npmjs.org/step/0.0.5
+85 silly registry.get cb [ 304,
+85 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+85 silly registry.get     etag: '"P8FVCJKIBIM0YGAF0NOUZN1U"',
+85 silly registry.get     date: 'Mon, 23 Dec 2013 04:12:58 GMT',
+85 silly registry.get     'content-length': '0' } ]
+86 verbose etag step/0.0.5 from cache
+87 http 304 https://registry.npmjs.org/superagent/0.15.5
+88 silly registry.get cb [ 304,
+88 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+88 silly registry.get     etag: '"7J60WRJAL2O8QWCA2AM1WGMES"',
+88 silly registry.get     date: 'Mon, 23 Dec 2013 04:12:58 GMT',
+88 silly registry.get     'content-length': '0' } ]
+89 verbose etag superagent/0.15.5 from cache
+90 silly lockFile 04a7067c-step-0-0-5 step@0.0.5
+91 silly lockFile 04a7067c-step-0-0-5 step@0.0.5
+92 silly lockFile 995bea5d-superagent-0-15-5 superagent@0.15.5
+93 silly lockFile 995bea5d-superagent-0-15-5 superagent@0.15.5
+94 silly resolved [ { name: 'step',
+94 silly resolved     version: '0.0.5',
+94 silly resolved     description: 'A simple control-flow library for node.JS that makes parallel execution, serial execution, and error handling painless.',
+94 silly resolved     engine: [ 'node >=0.2.0' ],
+94 silly resolved     author: { name: 'Tim Caswell', email: 'tim@creationix.com' },
+94 silly resolved     repository: { type: 'git', url: 'http://github.com/creationix/step.git' },
+94 silly resolved     main: 'lib/step',
+94 silly resolved     readme: '# Step\n\nA simple control-flow library for node.JS that makes parallel execution, serial execution, and error handling painless.\n\n## How to install\n\nSimply copy or link the lib/step.js file into your `$HOME/.node_libraries` folder.\n\n## How to use\n\nThe step library exports a single function I call `Step`.  It accepts any number of functions as arguments and runs them in serial order using the passed in `this` context as the callback to the next step.\n\n    Step(\n      function readSelf() {\n        fs.readFile(__filename, this);\n      },\n      function capitalize(err, text) {\n        if (err) throw err;\n        return text.toUpperCase();\n      },\n      function showIt(err, newText) {\n        if (err) throw err;\n        console.log(newText);\n      }\n    );\n\nNotice that we pass in `this` as the callback to `fs.readFile`.  When the file read completes, step will send the result as the arguments to the next function in the chain.  Then in the `capitalize` function we\'re doing synchronous work so we can simple return the new value and Step will route it as if we called the callback.\n\nThe first parameter is reserved for errors since this is the node standard.  Also any exceptions thrown are caught and passed as the first argument to the next function.  As long as you don\'t nest callback functions inline your main functions this prevents there from ever being any uncaught exceptions.  This is very important for long running node.JS servers since a single uncaught exception can bring the whole server down.\n\nAlso there is support for parallel actions:\n\n    Step(\n      // Loads two files in parallel\n      function loadStuff() {\n        fs.readFile(__filename, this.parallel());\n        fs.readFile("/etc/passwd", this.parallel());\n      },\n      // Show the result when done\n      function showStuff(err, code, users) {\n        if (err) throw err;\n        console.log(code);\n        console.log(users);\n      }\n    )\n\nHere we pass `this.parallel()` instead of `this` as the callback.  It internally keeps track of the number of callbacks issued and preserves their order then giving the result to the next step after all have finished.  If there is an error in any of the parallel actions, it will be passed as the first argument to the next step.\n\nAlso you can use group with a dynamic number of common tasks.\n\n    Step(\n      function readDir() {\n        fs.readdir(__dirname, this);\n      },\n      function readFiles(err, results) {\n        if (err) throw err;\n        // Create a new group\n        var group = this.group();\n        results.forEach(function (filename) {\n          if (/\\.js$/.test(filename)) {\n            fs.readFile(__dirname + "/" + filename, \'utf8\', group());\n          }\n        });\n      },\n      function showAll(err , files) {\n        if (err) throw err;\n        console.dir(files);\n      }\n    );\n\n*Note* that we both call `this.group()` and `group()`.  The first reserves a slot in the parameters of the next step, then calling `group()` generates the individual callbacks and increments the internal counter.\n',
+94 silly resolved     readmeFilename: 'README.markdown',
+94 silly resolved     bugs: { url: 'https://github.com/creationix/step/issues' },
+94 silly resolved     _id: 'step@0.0.5',
+94 silly resolved     _from: 'step@0.0.5' },
+94 silly resolved   { name: 'superagent',
+94 silly resolved     version: '0.15.5',
+94 silly resolved     description: 'elegant & feature rich browser / node HTTP with a fluent API',
+94 silly resolved     keywords: [ 'http', 'ajax', 'request', 'agent' ],
+94 silly resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+94 silly resolved     contributors: [ [Object] ],
+94 silly resolved     repository:
+94 silly resolved      { type: 'git',
+94 silly resolved        url: 'git://github.com/visionmedia/superagent.git' },
+94 silly resolved     dependencies:
+94 silly resolved      { qs: '0.6.5',
+94 silly resolved        formidable: '1.0.14',
+94 silly resolved        mime: '1.2.5',
+94 silly resolved        'emitter-component': '1.0.0',
+94 silly resolved        methods: '0.0.1',
+94 silly resolved        cookiejar: '1.3.0',
+94 silly resolved        debug: '~0.7.2',
+94 silly resolved        reduce: 'RedVentures/reduce#346d59' },
+94 silly resolved     devDependencies:
+94 silly resolved      { express: '3.3.1',
+94 silly resolved        'better-assert': '~0.1.0',
+94 silly resolved        should: '*',
+94 silly resolved        mocha: '*' },
+94 silly resolved     browser:
+94 silly resolved      { './lib/node/index.js': './lib/client.js',
+94 silly resolved        emitter: 'emitter-component' },
+94 silly resolved     component: { scripts: [Object] },
+94 silly resolved     main: './lib/node/index.js',
+94 silly resolved     engines: { node: '*' },
+94 silly resolved     readme: '# SuperAgent\n\n  SuperAgent is a small progressive __client-side__ HTTP request library, and __Node.js__ module with the same API, sporting many high-level HTTP client features. View the [docs](http://visionmedia.github.com/superagent/).\n\n![super agent](http://f.cl.ly/items/3d282n3A0h0Z0K2w0q2a/Screenshot.png)\n\n## Motivation\n\n  This library spawned from my frustration with jQuery\'s weak & inconsistent Ajax support. jQuery\'s API while having recently added some promise-like support, is largely static, forcing you to build up big objects containing all the header fields and options, not to mention most of the options are awkwardly named "type" instead of "method", etc. Onto examples!\n\n  The following is what you might typically do for a simple __GET__ with jQuery:\n\n```js\n$.get(\'/user/1\', function(data, textStatus, xhr){\n\n});\n```\n\ngreat, it\'s ok, but it\'s kinda lame having 3 arguments just to access something on the `xhr`. Our equivalent would be:\n\n```js\nrequest.get(\'/user/1\', function(res){\n\n});\n```\n\nthe response object is an instanceof `request.Response`, encapsulating all of this information instead of throwing a bunch of arguments at you. For example we can check `res.status`, `res.header` for header fields, `res.text`, `res.body` etc.\n\nAn example of a JSON POST with jQuery typically might use `$.post()`, however once you need to start defining header fields you have to then re-write it using `$.ajax()`... so that might look like:\n\n```js\n$.ajax({\n  url: \'/api/pet\',\n  type: \'POST\',\n  data: { name: \'Manny\', species: \'cat\' },\n  headers: { \'X-API-Key\': \'foobar\' }\n}).success(function(res){\n\n}).error(function(){\n\n});\n```\n\n Not only is it ugly it\'s pretty opinionated, jQuery likes to special-case {4,5}xx, for example you cannot (easily at least) receive a parsed JSON response for say "400 Bad Request". This same request would look like this:\n\n```js\nrequest\n  .post(\'/api/pet\')\n  .send({ name: \'Manny\', species: \'cat\' })\n  .set(\'X-API-Key\', \'foobar\')\n  .set(\'Accept\', \'application/json\')\n  .end(function(error, res){\n\n  });\n```\n\nbuilding on the existing API internally we also provide something similar to `$.post()` for those times in life where your interactions are very basic:\n\n```js\nrequest.post(\'/api/pet\', cat, function(error, res){\n\n});\n```\n\n## Running node tests\n\n  Install dependencies:\n\n     $ npm install\n\n  Run em!\n\n    $ make test\n\n## Running browser tests\n\n Install the test server deps (nodejs / express):\n\n    $ npm install\n\n Start the test server:\n\n    $ make test-server\n\n Visit `localhost:4000/` in the browser.\n\n## Browser build\n\n  The browser build of superagent is located in ./superagent.js\n\n## Examples:\n\n- [agency tests](https://github.com/visionmedia/superagent/blob/master/test/node/agency.js)\n- [express demo app](https://github.com/hunterloftis/component-test/blob/master/lib/users/test/controller.test.js)\n\n## Wiki\n\n  For superagent extensions such as couchdb and oauth visit the [wiki](https://github.com/visionmedia/superagent/wiki).\n\n## License\n\n  MIT\n',
+94 silly resolved     readmeFilename: 'Readme.md',
+94 silly resolved     bugs: { url: 'https://github.com/visionmedia/superagent/issues' },
+94 silly resolved     _id: 'superagent@0.15.5',
+94 silly resolved     _from: 'superagent@0.15.5' } ]
+95 info install step@0.0.5 into /Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j
+96 info install superagent@0.15.5 into /Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j
+97 info installOne step@0.0.5
+98 info installOne superagent@0.15.5
+99 info /Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/step unbuild
+100 info /Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/superagent unbuild
+101 verbose tar unpack /Users/davidgljay/.npm/step/0.0.5/package.tgz
+102 silly lockFile 06fa3bbd-les-node-neo4j-node-modules-step tar:///Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/step
+103 verbose lock tar:///Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/step /Users/davidgljay/.npm/06fa3bbd-les-node-neo4j-node-modules-step.lock
+104 silly lockFile 88aa3670-gljay-npm-step-0-0-5-package-tgz tar:///Users/davidgljay/.npm/step/0.0.5/package.tgz
+105 verbose lock tar:///Users/davidgljay/.npm/step/0.0.5/package.tgz /Users/davidgljay/.npm/88aa3670-gljay-npm-step-0-0-5-package-tgz.lock
+106 verbose tar unpack /Users/davidgljay/.npm/superagent/0.15.5/package.tgz
+107 silly lockFile 8ccbfca8-de-neo4j-node-modules-superagent tar:///Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/superagent
+108 verbose lock tar:///Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/superagent /Users/davidgljay/.npm/8ccbfca8-de-neo4j-node-modules-superagent.lock
+109 silly lockFile f5c693d1-pm-superagent-0-15-5-package-tgz tar:///Users/davidgljay/.npm/superagent/0.15.5/package.tgz
+110 verbose lock tar:///Users/davidgljay/.npm/superagent/0.15.5/package.tgz /Users/davidgljay/.npm/f5c693d1-pm-superagent-0-15-5-package-tgz.lock
+111 silly gunzTarPerm modes [ '755', '644' ]
+112 silly gunzTarPerm modes [ '755', '644' ]
+113 silly gunzTarPerm extractEntry package.json
+114 silly gunzTarPerm extractEntry package.json
+115 silly gunzTarPerm extractEntry README.markdown
+116 silly gunzTarPerm extractEntry lib/step.js
+117 silly gunzTarPerm extractEntry .npmignore
+118 silly gunzTarPerm extractEntry superagent.js
+119 silly gunzTarPerm extractEntry test/callbackTest.js
+120 silly gunzTarPerm extractEntry test/errorTest.js
+121 silly gunzTarPerm extractEntry test.js
+122 silly gunzTarPerm extractEntry test/fnTest.js
+123 silly gunzTarPerm extractEntry test/groupTest.js
+124 silly gunzTarPerm extractEntry Readme.md
+125 silly gunzTarPerm extractEntry component.json
+126 silly gunzTarPerm extractEntry test/helper.js
+127 silly gunzTarPerm extractEntry test/parallelTest.js
+128 silly gunzTarPerm extractEntry .travis.yml
+129 silly gunzTarPerm extractEntry docs/head.html
+130 silly gunzTarPerm extractEntry docs/index.md
+131 silly gunzTarPerm extractEntry docs/tail.html
+132 silly gunzTarPerm extractEntry lib/client.js
+133 silly gunzTarPerm extractEntry lib/node/agent.js
+134 silly gunzTarPerm extractEntry lib/node/index.js
+135 silly gunzTarPerm extractEntry lib/node/part.js
+136 silly lockFile 06fa3bbd-les-node-neo4j-node-modules-step tar:///Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/step
+137 silly lockFile 06fa3bbd-les-node-neo4j-node-modules-step tar:///Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/step
+138 silly gunzTarPerm extractEntry lib/node/response.js
+139 silly gunzTarPerm extractEntry lib/node/utils.js
+140 silly lockFile 88aa3670-gljay-npm-step-0-0-5-package-tgz tar:///Users/davidgljay/.npm/step/0.0.5/package.tgz
+141 silly lockFile 88aa3670-gljay-npm-step-0-0-5-package-tgz tar:///Users/davidgljay/.npm/step/0.0.5/package.tgz
+142 info preinstall step@0.0.5
+143 verbose readDependencies using package.json deps
+144 verbose readDependencies using package.json deps
+145 silly resolved []
+146 verbose about to build /Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/step
+147 info build /Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/step
+148 verbose linkStuff [ false,
+148 verbose linkStuff   false,
+148 verbose linkStuff   false,
+148 verbose linkStuff   '/Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules' ]
+149 info linkStuff step@0.0.5
+150 verbose linkBins step@0.0.5
+151 verbose linkMans step@0.0.5
+152 verbose rebuildBundles step@0.0.5
+153 info install step@0.0.5
+154 silly gunzTarPerm extractEntry lib/node/parsers/index.js
+155 silly gunzTarPerm extractEntry lib/node/parsers/json.js
+156 info postinstall step@0.0.5
+157 silly gunzTarPerm extractEntry lib/node/parsers/text.js
+158 silly gunzTarPerm extractEntry lib/node/parsers/urlencoded.js
+159 silly gunzTarPerm extractEntry Makefile
+160 silly gunzTarPerm extractEntry History.md
+161 silly gunzTarPerm extractEntry components/RedVentures-reduce/index.js
+162 silly gunzTarPerm extractEntry components/RedVentures-reduce/component.json
+163 silly gunzTarPerm extractEntry components/component-emitter/index.js
+164 silly gunzTarPerm extractEntry components/component-emitter/component.json
+165 silly gunzTarPerm extractEntry components/component-indexof/index.js
+166 silly gunzTarPerm extractEntry components/component-indexof/component.json
+167 silly lockFile 8ccbfca8-de-neo4j-node-modules-superagent tar:///Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/superagent
+168 silly lockFile 8ccbfca8-de-neo4j-node-modules-superagent tar:///Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/superagent
+169 silly lockFile f5c693d1-pm-superagent-0-15-5-package-tgz tar:///Users/davidgljay/.npm/superagent/0.15.5/package.tgz
+170 silly lockFile f5c693d1-pm-superagent-0-15-5-package-tgz tar:///Users/davidgljay/.npm/superagent/0.15.5/package.tgz
+171 info preinstall superagent@0.15.5
+172 verbose readDependencies using package.json deps
+173 verbose readDependencies using package.json deps
+174 verbose cache add [ 'mime@1.2.5', null ]
+175 verbose cache add name=undefined spec="mime@1.2.5" args=["mime@1.2.5",null]
+176 verbose parsed url { protocol: null,
+176 verbose parsed url   slashes: null,
+176 verbose parsed url   auth: null,
+176 verbose parsed url   host: null,
+176 verbose parsed url   port: null,
+176 verbose parsed url   hostname: null,
+176 verbose parsed url   hash: null,
+176 verbose parsed url   search: null,
+176 verbose parsed url   query: null,
+176 verbose parsed url   pathname: 'mime@1.2.5',
+176 verbose parsed url   path: 'mime@1.2.5',
+176 verbose parsed url   href: 'mime@1.2.5' }
+177 verbose cache add name="mime" spec="1.2.5" args=["mime","1.2.5"]
+178 verbose parsed url { protocol: null,
+178 verbose parsed url   slashes: null,
+178 verbose parsed url   auth: null,
+178 verbose parsed url   host: null,
+178 verbose parsed url   port: null,
+178 verbose parsed url   hostname: null,
+178 verbose parsed url   hash: null,
+178 verbose parsed url   search: null,
+178 verbose parsed url   query: null,
+178 verbose parsed url   pathname: '1.2.5',
+178 verbose parsed url   path: '1.2.5',
+178 verbose parsed url   href: '1.2.5' }
+179 verbose addNamed [ 'mime', '1.2.5' ]
+180 verbose addNamed [ '1.2.5', '1.2.5' ]
+181 silly lockFile d81daa29-mime-1-2-5 mime@1.2.5
+182 verbose lock mime@1.2.5 /Users/davidgljay/.npm/d81daa29-mime-1-2-5.lock
+183 verbose cache add [ 'qs@0.6.5', null ]
+184 verbose cache add name=undefined spec="qs@0.6.5" args=["qs@0.6.5",null]
+185 verbose parsed url { protocol: null,
+185 verbose parsed url   slashes: null,
+185 verbose parsed url   auth: null,
+185 verbose parsed url   host: null,
+185 verbose parsed url   port: null,
+185 verbose parsed url   hostname: null,
+185 verbose parsed url   hash: null,
+185 verbose parsed url   search: null,
+185 verbose parsed url   query: null,
+185 verbose parsed url   pathname: 'qs@0.6.5',
+185 verbose parsed url   path: 'qs@0.6.5',
+185 verbose parsed url   href: 'qs@0.6.5' }
+186 verbose cache add name="qs" spec="0.6.5" args=["qs","0.6.5"]
+187 verbose parsed url { protocol: null,
+187 verbose parsed url   slashes: null,
+187 verbose parsed url   auth: null,
+187 verbose parsed url   host: null,
+187 verbose parsed url   port: null,
+187 verbose parsed url   hostname: null,
+187 verbose parsed url   hash: null,
+187 verbose parsed url   search: null,
+187 verbose parsed url   query: null,
+187 verbose parsed url   pathname: '0.6.5',
+187 verbose parsed url   path: '0.6.5',
+187 verbose parsed url   href: '0.6.5' }
+188 verbose addNamed [ 'qs', '0.6.5' ]
+189 verbose addNamed [ '0.6.5', '0.6.5' ]
+190 silly lockFile f5e5a40f-qs-0-6-5 qs@0.6.5
+191 verbose lock qs@0.6.5 /Users/davidgljay/.npm/f5e5a40f-qs-0-6-5.lock
+192 verbose cache add [ 'formidable@1.0.14', null ]
+193 verbose cache add name=undefined spec="formidable@1.0.14" args=["formidable@1.0.14",null]
+194 verbose parsed url { protocol: null,
+194 verbose parsed url   slashes: null,
+194 verbose parsed url   auth: null,
+194 verbose parsed url   host: null,
+194 verbose parsed url   port: null,
+194 verbose parsed url   hostname: null,
+194 verbose parsed url   hash: null,
+194 verbose parsed url   search: null,
+194 verbose parsed url   query: null,
+194 verbose parsed url   pathname: 'formidable@1.0.14',
+194 verbose parsed url   path: 'formidable@1.0.14',
+194 verbose parsed url   href: 'formidable@1.0.14' }
+195 verbose cache add name="formidable" spec="1.0.14" args=["formidable","1.0.14"]
+196 verbose parsed url { protocol: null,
+196 verbose parsed url   slashes: null,
+196 verbose parsed url   auth: null,
+196 verbose parsed url   host: null,
+196 verbose parsed url   port: null,
+196 verbose parsed url   hostname: null,
+196 verbose parsed url   hash: null,
+196 verbose parsed url   search: null,
+196 verbose parsed url   query: null,
+196 verbose parsed url   pathname: '1.0.14',
+196 verbose parsed url   path: '1.0.14',
+196 verbose parsed url   href: '1.0.14' }
+197 verbose addNamed [ 'formidable', '1.0.14' ]
+198 verbose addNamed [ '1.0.14', '1.0.14' ]
+199 silly lockFile 3f08b74a-formidable-1-0-14 formidable@1.0.14
+200 verbose lock formidable@1.0.14 /Users/davidgljay/.npm/3f08b74a-formidable-1-0-14.lock
+201 verbose cache add [ 'emitter-component@1.0.0', null ]
+202 verbose cache add name=undefined spec="emitter-component@1.0.0" args=["emitter-component@1.0.0",null]
+203 verbose parsed url { protocol: null,
+203 verbose parsed url   slashes: null,
+203 verbose parsed url   auth: null,
+203 verbose parsed url   host: null,
+203 verbose parsed url   port: null,
+203 verbose parsed url   hostname: null,
+203 verbose parsed url   hash: null,
+203 verbose parsed url   search: null,
+203 verbose parsed url   query: null,
+203 verbose parsed url   pathname: 'emitter-component@1.0.0',
+203 verbose parsed url   path: 'emitter-component@1.0.0',
+203 verbose parsed url   href: 'emitter-component@1.0.0' }
+204 verbose cache add name="emitter-component" spec="1.0.0" args=["emitter-component","1.0.0"]
+205 verbose parsed url { protocol: null,
+205 verbose parsed url   slashes: null,
+205 verbose parsed url   auth: null,
+205 verbose parsed url   host: null,
+205 verbose parsed url   port: null,
+205 verbose parsed url   hostname: null,
+205 verbose parsed url   hash: null,
+205 verbose parsed url   search: null,
+205 verbose parsed url   query: null,
+205 verbose parsed url   pathname: '1.0.0',
+205 verbose parsed url   path: '1.0.0',
+205 verbose parsed url   href: '1.0.0' }
+206 verbose addNamed [ 'emitter-component', '1.0.0' ]
+207 verbose addNamed [ '1.0.0', '1.0.0' ]
+208 silly lockFile 07597ef1-emitter-component-1-0-0 emitter-component@1.0.0
+209 verbose lock emitter-component@1.0.0 /Users/davidgljay/.npm/07597ef1-emitter-component-1-0-0.lock
+210 verbose cache add [ 'methods@0.0.1', null ]
+211 verbose cache add name=undefined spec="methods@0.0.1" args=["methods@0.0.1",null]
+212 verbose parsed url { protocol: null,
+212 verbose parsed url   slashes: null,
+212 verbose parsed url   auth: null,
+212 verbose parsed url   host: null,
+212 verbose parsed url   port: null,
+212 verbose parsed url   hostname: null,
+212 verbose parsed url   hash: null,
+212 verbose parsed url   search: null,
+212 verbose parsed url   query: null,
+212 verbose parsed url   pathname: 'methods@0.0.1',
+212 verbose parsed url   path: 'methods@0.0.1',
+212 verbose parsed url   href: 'methods@0.0.1' }
+213 verbose cache add name="methods" spec="0.0.1" args=["methods","0.0.1"]
+214 verbose parsed url { protocol: null,
+214 verbose parsed url   slashes: null,
+214 verbose parsed url   auth: null,
+214 verbose parsed url   host: null,
+214 verbose parsed url   port: null,
+214 verbose parsed url   hostname: null,
+214 verbose parsed url   hash: null,
+214 verbose parsed url   search: null,
+214 verbose parsed url   query: null,
+214 verbose parsed url   pathname: '0.0.1',
+214 verbose parsed url   path: '0.0.1',
+214 verbose parsed url   href: '0.0.1' }
+215 verbose addNamed [ 'methods', '0.0.1' ]
+216 verbose addNamed [ '0.0.1', '0.0.1' ]
+217 silly lockFile 209c2920-methods-0-0-1 methods@0.0.1
+218 verbose lock methods@0.0.1 /Users/davidgljay/.npm/209c2920-methods-0-0-1.lock
+219 verbose cache add [ 'cookiejar@1.3.0', null ]
+220 verbose cache add name=undefined spec="cookiejar@1.3.0" args=["cookiejar@1.3.0",null]
+221 verbose parsed url { protocol: null,
+221 verbose parsed url   slashes: null,
+221 verbose parsed url   auth: null,
+221 verbose parsed url   host: null,
+221 verbose parsed url   port: null,
+221 verbose parsed url   hostname: null,
+221 verbose parsed url   hash: null,
+221 verbose parsed url   search: null,
+221 verbose parsed url   query: null,
+221 verbose parsed url   pathname: 'cookiejar@1.3.0',
+221 verbose parsed url   path: 'cookiejar@1.3.0',
+221 verbose parsed url   href: 'cookiejar@1.3.0' }
+222 verbose cache add name="cookiejar" spec="1.3.0" args=["cookiejar","1.3.0"]
+223 verbose parsed url { protocol: null,
+223 verbose parsed url   slashes: null,
+223 verbose parsed url   auth: null,
+223 verbose parsed url   host: null,
+223 verbose parsed url   port: null,
+223 verbose parsed url   hostname: null,
+223 verbose parsed url   hash: null,
+223 verbose parsed url   search: null,
+223 verbose parsed url   query: null,
+223 verbose parsed url   pathname: '1.3.0',
+223 verbose parsed url   path: '1.3.0',
+223 verbose parsed url   href: '1.3.0' }
+224 verbose addNamed [ 'cookiejar', '1.3.0' ]
+225 verbose addNamed [ '1.3.0', '1.3.0' ]
+226 silly lockFile 193262bd-cookiejar-1-3-0 cookiejar@1.3.0
+227 verbose lock cookiejar@1.3.0 /Users/davidgljay/.npm/193262bd-cookiejar-1-3-0.lock
+228 verbose cache add [ 'debug@~0.7.2', null ]
+229 verbose cache add name=undefined spec="debug@~0.7.2" args=["debug@~0.7.2",null]
+230 verbose parsed url { protocol: null,
+230 verbose parsed url   slashes: null,
+230 verbose parsed url   auth: null,
+230 verbose parsed url   host: null,
+230 verbose parsed url   port: null,
+230 verbose parsed url   hostname: null,
+230 verbose parsed url   hash: null,
+230 verbose parsed url   search: null,
+230 verbose parsed url   query: null,
+230 verbose parsed url   pathname: 'debug@~0.7.2',
+230 verbose parsed url   path: 'debug@~0.7.2',
+230 verbose parsed url   href: 'debug@~0.7.2' }
+231 verbose cache add name="debug" spec="~0.7.2" args=["debug","~0.7.2"]
+232 verbose parsed url { protocol: null,
+232 verbose parsed url   slashes: null,
+232 verbose parsed url   auth: null,
+232 verbose parsed url   host: null,
+232 verbose parsed url   port: null,
+232 verbose parsed url   hostname: null,
+232 verbose parsed url   hash: null,
+232 verbose parsed url   search: null,
+232 verbose parsed url   query: null,
+232 verbose parsed url   pathname: '~0.7.2',
+232 verbose parsed url   path: '~0.7.2',
+232 verbose parsed url   href: '~0.7.2' }
+233 verbose addNamed [ 'debug', '~0.7.2' ]
+234 verbose addNamed [ null, '>=0.7.2-0 <0.8.0-0' ]
+235 silly lockFile d0156cbb-debug-0-7-2 debug@~0.7.2
+236 verbose lock debug@~0.7.2 /Users/davidgljay/.npm/d0156cbb-debug-0-7-2.lock
+237 verbose cache add [ 'reduce@RedVentures/reduce#346d59', null ]
+238 verbose cache add name=undefined spec="reduce@RedVentures/reduce#346d59" args=["reduce@RedVentures/reduce#346d59",null]
+239 verbose parsed url { protocol: null,
+239 verbose parsed url   slashes: null,
+239 verbose parsed url   auth: null,
+239 verbose parsed url   host: null,
+239 verbose parsed url   port: null,
+239 verbose parsed url   hostname: null,
+239 verbose parsed url   hash: '#346d59',
+239 verbose parsed url   search: null,
+239 verbose parsed url   query: null,
+239 verbose parsed url   pathname: 'reduce@RedVentures/reduce',
+239 verbose parsed url   path: 'reduce@RedVentures/reduce',
+239 verbose parsed url   href: 'reduce@RedVentures/reduce#346d59' }
+240 verbose cache add name="reduce" spec="RedVentures/reduce#346d59" args=["reduce","RedVentures/reduce#346d59"]
+241 verbose parsed url { protocol: null,
+241 verbose parsed url   slashes: null,
+241 verbose parsed url   auth: null,
+241 verbose parsed url   host: null,
+241 verbose parsed url   port: null,
+241 verbose parsed url   hostname: null,
+241 verbose parsed url   hash: '#346d59',
+241 verbose parsed url   search: null,
+241 verbose parsed url   query: null,
+241 verbose parsed url   pathname: 'RedVentures/reduce',
+241 verbose parsed url   path: 'RedVentures/reduce',
+241 verbose parsed url   href: 'RedVentures/reduce#346d59' }
+242 verbose addNamed [ 'reduce', 'RedVentures/reduce#346d59' ]
+243 verbose addNamed [ null, null ]
+244 silly lockFile d54a36d2-reduce-RedVentures-reduce-346d59 reduce@RedVentures/reduce#346d59
+245 verbose lock reduce@RedVentures/reduce#346d59 /Users/davidgljay/.npm/d54a36d2-reduce-RedVentures-reduce-346d59.lock
+246 silly addNameRange { name: 'debug', range: '>=0.7.2-0 <0.8.0-0', hasData: false }
+247 info addNameTag [ 'reduce', 'RedVentures/reduce#346d59' ]
+248 verbose url raw mime/1.2.5
+249 verbose url resolving [ 'https://registry.npmjs.org/', './mime/1.2.5' ]
+250 verbose url resolved https://registry.npmjs.org/mime/1.2.5
+251 info trying registry request attempt 1 at 23:12:58
+252 verbose etag "4J418X585LGDMLXNV7U9RCUNU"
+253 http GET https://registry.npmjs.org/mime/1.2.5
+254 verbose url raw qs/0.6.5
+255 verbose url resolving [ 'https://registry.npmjs.org/', './qs/0.6.5' ]
+256 verbose url resolved https://registry.npmjs.org/qs/0.6.5
+257 info trying registry request attempt 1 at 23:12:58
+258 verbose etag "1H5KZS5J3GSV498GE8GTMXGBY"
+259 http GET https://registry.npmjs.org/qs/0.6.5
+260 verbose url raw formidable/1.0.14
+261 verbose url resolving [ 'https://registry.npmjs.org/', './formidable/1.0.14' ]
+262 verbose url resolved https://registry.npmjs.org/formidable/1.0.14
+263 info trying registry request attempt 1 at 23:12:58
+264 verbose etag "BZDNEUJJ7A07UC3P2S6J4Y03F"
+265 http GET https://registry.npmjs.org/formidable/1.0.14
+266 verbose url raw emitter-component/1.0.0
+267 verbose url resolving [ 'https://registry.npmjs.org/', './emitter-component/1.0.0' ]
+268 verbose url resolved https://registry.npmjs.org/emitter-component/1.0.0
+269 info trying registry request attempt 1 at 23:12:58
+270 verbose etag "6YH7YL33490Z7GUTI8ZHTW9BK"
+271 http GET https://registry.npmjs.org/emitter-component/1.0.0
+272 verbose url raw methods/0.0.1
+273 verbose url resolving [ 'https://registry.npmjs.org/', './methods/0.0.1' ]
+274 verbose url resolved https://registry.npmjs.org/methods/0.0.1
+275 info trying registry request attempt 1 at 23:12:58
+276 verbose etag "5YMRMHX9CVHKGLKW61J769JSS"
+277 http GET https://registry.npmjs.org/methods/0.0.1
+278 verbose url raw cookiejar/1.3.0
+279 verbose url resolving [ 'https://registry.npmjs.org/', './cookiejar/1.3.0' ]
+280 verbose url resolved https://registry.npmjs.org/cookiejar/1.3.0
+281 info trying registry request attempt 1 at 23:12:58
+282 verbose etag "29PBAESW214T9CLM6KD8JZK8V"
+283 http GET https://registry.npmjs.org/cookiejar/1.3.0
+284 verbose url raw debug
+285 verbose url resolving [ 'https://registry.npmjs.org/', './debug' ]
+286 verbose url resolved https://registry.npmjs.org/debug
+287 info trying registry request attempt 1 at 23:12:58
+288 verbose etag "9D3C87AW7RWSC31HTWRBAC8U5"
+289 http GET https://registry.npmjs.org/debug
+290 verbose url raw reduce
+291 verbose url resolving [ 'https://registry.npmjs.org/', './reduce' ]
+292 verbose url resolved https://registry.npmjs.org/reduce
+293 info trying registry request attempt 1 at 23:12:58
+294 verbose etag "7DU17XG2J817QAOEV9GGJAFWW"
+295 http GET https://registry.npmjs.org/reduce
+296 http 304 https://registry.npmjs.org/qs/0.6.5
+297 silly registry.get cb [ 304,
+297 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+297 silly registry.get     etag: '"1H5KZS5J3GSV498GE8GTMXGBY"',
+297 silly registry.get     date: 'Mon, 23 Dec 2013 04:12:59 GMT',
+297 silly registry.get     'content-length': '0' } ]
+298 verbose etag qs/0.6.5 from cache
+299 http 304 https://registry.npmjs.org/formidable/1.0.14
+300 silly registry.get cb [ 304,
+300 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+300 silly registry.get     etag: '"BZDNEUJJ7A07UC3P2S6J4Y03F"',
+300 silly registry.get     date: 'Mon, 23 Dec 2013 04:12:59 GMT',
+300 silly registry.get     'content-length': '0' } ]
+301 verbose etag formidable/1.0.14 from cache
+302 silly lockFile f5e5a40f-qs-0-6-5 qs@0.6.5
+303 silly lockFile f5e5a40f-qs-0-6-5 qs@0.6.5
+304 silly lockFile 3f08b74a-formidable-1-0-14 formidable@1.0.14
+305 silly lockFile 3f08b74a-formidable-1-0-14 formidable@1.0.14
+306 http 304 https://registry.npmjs.org/mime/1.2.5
+307 silly registry.get cb [ 304,
+307 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+307 silly registry.get     etag: '"4J418X585LGDMLXNV7U9RCUNU"',
+307 silly registry.get     date: 'Mon, 23 Dec 2013 04:12:59 GMT',
+307 silly registry.get     'content-length': '0' } ]
+308 verbose etag mime/1.2.5 from cache
+309 http 304 https://registry.npmjs.org/methods/0.0.1
+310 silly registry.get cb [ 304,
+310 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+310 silly registry.get     etag: '"5YMRMHX9CVHKGLKW61J769JSS"',
+310 silly registry.get     date: 'Mon, 23 Dec 2013 04:12:59 GMT',
+310 silly registry.get     'content-length': '0' } ]
+311 verbose etag methods/0.0.1 from cache
+312 silly lockFile 209c2920-methods-0-0-1 methods@0.0.1
+313 silly lockFile 209c2920-methods-0-0-1 methods@0.0.1
+314 silly lockFile d81daa29-mime-1-2-5 mime@1.2.5
+315 silly lockFile d81daa29-mime-1-2-5 mime@1.2.5
+316 http 304 https://registry.npmjs.org/cookiejar/1.3.0
+317 silly registry.get cb [ 304,
+317 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+317 silly registry.get     etag: '"29PBAESW214T9CLM6KD8JZK8V"',
+317 silly registry.get     date: 'Mon, 23 Dec 2013 04:12:59 GMT',
+317 silly registry.get     'content-length': '0' } ]
+318 verbose etag cookiejar/1.3.0 from cache
+319 http 304 https://registry.npmjs.org/debug
+320 silly registry.get cb [ 304,
+320 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+320 silly registry.get     etag: '"9D3C87AW7RWSC31HTWRBAC8U5"',
+320 silly registry.get     date: 'Mon, 23 Dec 2013 04:12:59 GMT',
+320 silly registry.get     'content-length': '0' } ]
+321 verbose etag debug from cache
+322 silly lockFile 193262bd-cookiejar-1-3-0 cookiejar@1.3.0
+323 silly lockFile 193262bd-cookiejar-1-3-0 cookiejar@1.3.0
+324 silly addNameRange number 2 { name: 'debug', range: '>=0.7.2-0 <0.8.0-0', hasData: true }
+325 silly addNameRange versions [ 'debug',
+325 silly addNameRange   [ '0.0.1',
+325 silly addNameRange     '0.1.0',
+325 silly addNameRange     '0.2.0',
+325 silly addNameRange     '0.3.0',
+325 silly addNameRange     '0.4.0',
+325 silly addNameRange     '0.4.1',
+325 silly addNameRange     '0.5.0',
+325 silly addNameRange     '0.6.0',
+325 silly addNameRange     '0.7.0',
+325 silly addNameRange     '0.7.1',
+325 silly addNameRange     '0.7.2',
+325 silly addNameRange     '0.7.3',
+325 silly addNameRange     '0.7.4' ] ]
+326 verbose addNamed [ 'debug', '0.7.4' ]
+327 verbose addNamed [ '0.7.4', '0.7.4' ]
+328 silly lockFile 16160008-debug-0-7-4 debug@0.7.4
+329 verbose lock debug@0.7.4 /Users/davidgljay/.npm/16160008-debug-0-7-4.lock
+330 http 304 https://registry.npmjs.org/emitter-component/1.0.0
+331 silly registry.get cb [ 304,
+331 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+331 silly registry.get     etag: '"6YH7YL33490Z7GUTI8ZHTW9BK"',
+331 silly registry.get     date: 'Mon, 23 Dec 2013 04:12:59 GMT',
+331 silly registry.get     'content-length': '0' } ]
+332 verbose etag emitter-component/1.0.0 from cache
+333 silly lockFile 16160008-debug-0-7-4 debug@0.7.4
+334 silly lockFile 16160008-debug-0-7-4 debug@0.7.4
+335 silly lockFile d0156cbb-debug-0-7-2 debug@~0.7.2
+336 silly lockFile d0156cbb-debug-0-7-2 debug@~0.7.2
+337 silly lockFile 07597ef1-emitter-component-1-0-0 emitter-component@1.0.0
+338 silly lockFile 07597ef1-emitter-component-1-0-0 emitter-component@1.0.0
+339 http 304 https://registry.npmjs.org/reduce
+340 silly registry.get cb [ 304,
+340 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+340 silly registry.get     etag: '"7DU17XG2J817QAOEV9GGJAFWW"',
+340 silly registry.get     date: 'Mon, 23 Dec 2013 04:12:59 GMT',
+340 silly registry.get     'content-length': '0' } ]
+341 verbose etag reduce from cache
+342 info maybeGithub Attempting RedVentures/reduce#346d59 from git://github.com/RedVentures/reduce#346d59
+343 silly lockFile 395eadb2-ub-com-RedVentures-reduce-346d59 git://github.com/RedVentures/reduce#346d59
+344 verbose lock git://github.com/RedVentures/reduce#346d59 /Users/davidgljay/.npm/395eadb2-ub-com-RedVentures-reduce-346d59.lock
+345 verbose addRemoteGit [ 'git://github.com/RedVentures/reduce', '346d59' ]
+346 silly lockFile 12050916-it-github-com-RedVentures-reduce git://github.com/RedVentures/reduce
+347 info maybeGithub Attempting RedVentures/reduce#346d59 from git+ssh://git@github.com:RedVentures/reduce#346d59
+348 silly lockFile 20bed530-ub-com-RedVentures-reduce-346d59 git+ssh://git@github.com:RedVentures/reduce#346d59
+349 verbose lock git+ssh://git@github.com:RedVentures/reduce#346d59 /Users/davidgljay/.npm/20bed530-ub-com-RedVentures-reduce-346d59.lock
+350 verbose addRemoteGit [ 'git@github.com:RedVentures/reduce', '346d59' ]
+351 silly lockFile a975f742-it-github-com-RedVentures-reduce git@github.com:RedVentures/reduce
+352 silly lockFile d54a36d2-reduce-RedVentures-reduce-346d59 reduce@RedVentures/reduce#346d59
+353 silly lockFile d54a36d2-reduce-RedVentures-reduce-346d59 reduce@RedVentures/reduce#346d59
+354 verbose about to build /Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/superagent
+355 info /Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules/superagent unbuild
+356 info preuninstall superagent@0.15.5
+357 info uninstall superagent@0.15.5
+358 verbose false,/Users/davidgljay/Sites/buzzmap/node_modules,/Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j/node_modules unbuild superagent@0.15.5
+359 info postuninstall superagent@0.15.5
+360 verbose about to build /Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j
+361 info /Users/davidgljay/Sites/buzzmap/node_modules/node-neo4j unbuild
+362 info preuninstall node-neo4j@1.0.5
+363 info uninstall node-neo4j@1.0.5
+364 verbose true,/Users/davidgljay/Sites/buzzmap/node_modules,/Users/davidgljay/Sites/buzzmap/node_modules unbuild node-neo4j@1.0.5
+365 info postuninstall node-neo4j@1.0.5
+366 error Error: No compatible version found: reduce@'RedVentures/reduce#346d59'
+366 error Valid install targets:
+366 error ["0.1.0","0.1.2"]
+366 error     at installTargetsError (/usr/local/Cellar/node/0.10.20/lib/node_modules/npm/lib/cache.js:719:10)
+366 error     at /usr/local/Cellar/node/0.10.20/lib/node_modules/npm/lib/cache.js:638:10
+366 error     at saved (/usr/local/Cellar/node/0.10.20/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js:142:7)
+366 error     at /usr/local/Cellar/node/0.10.20/lib/node_modules/npm/node_modules/graceful-fs/polyfills.js:133:7
+366 error     at Object.oncomplete (fs.js:107:15)
+367 error If you need help, you may report this log at:
+367 error     <http://github.com/isaacs/npm/issues>
+367 error or email it to:
+367 error     <npm-@googlegroups.com>
+368 error System Darwin 13.0.0
+369 error command "/usr/local/Cellar/node/0.10.20/bin/node" "/usr/local/bin/npm" "install"
+370 error cwd /Users/davidgljay/Sites/buzzmap
+371 error node -v v0.10.20
+372 error npm -v 1.3.11
+373 verbose exit [ 1, true ]

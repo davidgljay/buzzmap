@@ -1,14 +1,16 @@
 //Functionality for integrating with the twitter API
 
 var Twit = require('twit')
+var config = require('./config.js')
 
-// var T = new Twit({
-//     consumer_key:         process.env.TWITTER_CONSUMER_KEY
-//   , consumer_secret:      process.env.TWITTER_CONSUMER_SECRET
-//   , access_token:         process.env.TWITTER_ACCESS_TOKEN
-//   , access_token_secret:  process.env.TWITTER_ACCESS_SECRET
-// })
+config.setup();
 
+var T = new Twit({
+    consumer_key:         process.env.TWITTER_CONSUMER_KEY
+  , consumer_secret:      process.env.TWITTER_CONSUMER_SECRET
+  , access_token:         process.env.TWITTER_ACCESS_TOKEN
+  , access_token_secret:  process.env.TWITTER_ACCESS_SECRET
+})
 
 //
 //  stream a sample of public statuses
@@ -20,7 +22,7 @@ var Twit = require('twit')
 // })
 
 // stream.on('tweet', function (tweet) {
-//  console.log(tweet)
+//  console.log(tweet.text)
 // })
 
 // stream.on('disconnect', function (disconnectMessage) {
@@ -33,11 +35,11 @@ var Twit = require('twit')
 //
 // filter the public stream by english tweets containing `#apple`
 //
-// var stream = T.stream('statuses/filter', { track: ['is'], language: 'en' })
+var stream = T.stream('statuses/filter', { track: ['samsung'], language: 'en' })
 
-// stream.on('tweet', function (tweet) {
-//   console.log(tweet.user.screen_name);
-// })
+stream.on('tweet', function (tweet) {
+  console.log(tweet.user.screen_name + ': ' + tweet.text);
+})
 
 //
 //  tweet 'hello world!'
