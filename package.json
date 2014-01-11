@@ -10,7 +10,9 @@
     "jade": "*",
     "stylus": "*",
     "twit" : "1.1.11",
-    "node-neo4j": "1.0.5"
+    "node-neo4j": "1.0.5",
+    "async": "0.2.9",
+    "promised-io": "~0.3.4"
 
   }
 }

@@ -1,7 +1,9 @@
-doctype 5
-html
+doctype html
+html(ng-app="buzzMap")
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascript/vendor/angular/angular.min.js')
+    script(src='/javascript/app.js')
   body
     block content
