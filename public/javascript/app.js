@@ -1,3 +1,1 @@
-'use strict';
-
-angular.module('buzzMap', []);
+var app = angular.module('buzzMap', ['d3', 'd3Display']);

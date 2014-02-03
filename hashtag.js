@@ -3,56 +3,14 @@ var neo4j = require('node-neo4j');
 var db = new neo4j('http://localhost:7474');
 var async = require('async');
 var Deferred = require("promised-io/promise").Deferred;
-var twitter = require('./twitter.js');
+var twitter = require('./twitter.js').twitter;
 
 var Hashtag = function () {
 };
 
-Hashtag.prototype.find_or_create = function(name) {
+var track = function(list) {
 
-//	this.name = (name.slice(0,1) == '#') ? name.slice(0,-1) : name;
-	this.tag = '#' + name;
-	this.name = name;
-	var deferred = new Deferred
-
-	var neo4jquery = 'CREATE UNIQUE (h:Hashtag {name:"' + name + '", track: true});'
-	db.cypherQuery(neo4jquery, function(err, result) {
-		if (err) {console.log(err)};
-		console.log('Creating hashtag #' + name);
-		deferred.resolve(true);
-	})
-
-	this.velocity = function(hash) {
-		//Make neo4J query
-		var neo4jquery = 'MATCH (h:Hashtag)-[:INCLUDES]->(t:Tweet) WHERE h.name = "' + hash + '" RETURN t.created_at ORDER BY t.created_at DESC LIMIT 20';
-		//Make a promise for when it's resolved;
-		var deferred = new Deferred;
-
-
-		var average = function (array) {
-			var sum = 0;
-			if (array.length === 1) {
-				sum = 259200000;
-			} else {
-				sum = array[(array.length - 1)] - array[0];
-			};
-			return (array.length/sum * 60000);
-		};
-
-		db.cypherQuery(neo4jquery, function(err, result){
-	      if(err) console.log(err);
-		  var array = result.data.map(function(n){return (new Date(n).getTime())}).sort();
-		  deferred.resolve(average(array));
-	  	});
-	  	return deferred.promise;
-	};
-
-	return deferred.promise;
-};
-
-Hashtag.prototype.track = function() {
-	var stream = twitter.stream('statuses/filter', { track: ['#' + name], language: 'en' })
-	console.log('Tracking hashtag: #' + name);
+	var stream = twitter.stream('statuses/filter', { track: list, language: 'en' })
 
 	stream.on('tweet', function (tweet) {
 	  console.log('Got tweet!');
@@ -93,6 +51,49 @@ Hashtag.prototype.track = function() {
 
 	});
 	};
+
+Hashtag.prototype.find_or_create = function(name) {
+
+//	this.name = (name.slice(0,1) == '#') ? name.slice(0,-1) : name;
+	this.tag = '#' + name;
+	this.name = name;
+	var deferred = new Deferred
+
+	var neo4jquery = 'CREATE UNIQUE (h:Hashtag {name:"' + name + '", track: true});'
+	db.cypherQuery(neo4jquery, function(err, result) {
+		if (err) {console.log(err)};
+		console.log('Creating hashtag #' + name);
+		track(['#' + name]);
+		deferred.resolve(true);
+	})
+
+	this.velocity = function(hash) {
+		//Make neo4J query
+		var neo4jquery = 'MATCH (h:Hashtag)-[:INCLUDES]->(t:Tweet) WHERE h.name = "' + hash + '" RETURN t.created_at ORDER BY t.created_at DESC LIMIT 20';
+		//Make a promise for when it's resolved;
+		var deferred = new Deferred;
+
+
+		var average = function (array) {
+			var sum = 0;
+			if (array.length === 1) {
+				sum = 259200000;
+			} else {
+				sum = array[(array.length - 1)] - array[0];
+			};
+			return (array.length/sum * 60000);
+		};
+
+		db.cypherQuery(neo4jquery, function(err, result){
+	      if(err) console.log(err);
+		  var array = result.data.map(function(n){return (new Date(n).getTime())}).sort();
+		  deferred.resolve(average(array));
+	  	});
+	  	return deferred.promise;
+	};
+
+	return deferred.promise;
+};
 	
 Hashtag.prototype.find = function(name) {
 	var neo4jquery = "MATCH (h:Hashtag) WHERE h.name='" + name + "' RETURN h;"
@@ -110,12 +111,35 @@ Hashtag.prototype.find = function(name) {
 	return deferred.promise;
 };
 
+Hashtag.prototype.index = function() {
+	var deferred = new Deferred;
+	var neo4jquery = "MATCH (h1:Hashtag) WHERE h1.track=true RETURN h1;"
+	db.cypherQuery(neo4jquery, function(err, result){
+		if(err) throw err;
+		var list = result.data.map(function (d) {return d.data});
+		deferred.resolve(list);
+	});
+	return deferred.promise;
+};
+
+Hashtag.prototype.trackall = function() {
+	var deferred = new Deferred;
+	var neo4jquery = "MATCH (h1:Hashtag) WHERE h1.track=true RETURN h1;"
+	db.cypherQuery(neo4jquery, function(err, result){
+		if(err) throw err;
+		var list = result.data.map(function (d) {return '#' + d.data.name});
+		track(list);
+		deferred.resolve(list);
+	});
+	return deferred.promise;
+};
+
 Hashtag.prototype.map = function(name) {
 var deferred = new Deferred;
 var velocity = this.velocity;
 var neo4jquery = "MATCH (h1:Hashtag)-[r:LINKED]->(h2:Hashtag) WHERE h1.name='" + name + "' RETURN h2,r ORDER BY r.count DESC LIMIT 20;" 
 db.cypherQuery(neo4jquery, function(err, result){
- 	if(err) console.log(err);
+ 	if(err) throw err;
   	var data = result.data.map(function(d) {return d.data});
   	var map = [];
   	for (var i = 0; i<data.length; i+=2) {
@@ -180,5 +204,3 @@ Hashtag.prototype.list = function(name) {
 };
 
 module.exports = Hashtag;
-
-var hashtag = new Hashtag;

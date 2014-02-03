@@ -3,17 +3,17 @@
 var Twit = require('twit');
 var config = require('./config.js');
 
-config.setup();
 
-var twit = new Twit({
+module.exports.initialize = function(tokens) {
+	var twit = new Twit({
     consumer_key:         process.env.TWITTER_CONSUMER_KEY
   , consumer_secret:      process.env.TWITTER_CONSUMER_SECRET
-  , access_token:         process.env.TWITTER_ACCESS_TOKEN
-  , access_token_secret:  process.env.TWITTER_ACCESS_SECRET
+  , access_token:         tokens.oauth_token
+  , access_token_secret:  tokens.oauth_verifier
 })
-
-module.exports = twit;
-
+	console.log('Verifying twitter');
+	module.exports.twitter = twit;
+};
 
 
 
