@@ -45,18 +45,40 @@ angular.module('d3Display', ['d3'])
 				    .domain([0,50])
 				    .range([0,40]);
 
-				    var nodes = [];
+				    var nodes = [],
+				    links = [];
 
-				    data.forEach(function (d) {
+				    data.nodes.forEach(function (d) {
 				    	nodes.push(d);
 				    });
 
-				    var force = d3.layout.force()
-				    	.charge(function(d){return hashsize(d.velocity)*charge})
-				    	.size([width,height]);
+				    data.links.forEach(function (d) {
+				    	links.push(d)
+				    });
 
+				   var force = d3.layout.force()
+				    .nodes(nodes)
+				    .links(links)
+				    .on("tick", function(nodes) {
+					    text.attr("x", function(d) { return d.x; })
+         					.attr("y", function(d) { return d.y; });
+					    circle.attr("cx", function(d) { return d.x; })
+         					.attr("cy", function(d) { return d.y; });
+         				link.attr("x1", function(d) { return d.source.x; })
+        					.attr("y1", function(d) { return d.source.y; })
+        					.attr("x2", function(d) { return d.target.x; })
+        					.attr("y2", function(d) { return d.target.y; });
+    					})
+				    .size([width, height])
+				    .charge(-800)
+				    .start();
 
-
+    				var link = svg.selectAll("line")
+   						.data(links)
+  						.enter().append("line")
+      					.attr("class", "link")
+      					.style("stroke-width", "5")
+      					.style("stroke", "black");
 
 				    var circle = svg.selectAll("circle")
 				    	.data(nodes)
@@ -64,18 +86,26 @@ angular.module('d3Display', ['d3'])
 				    	.style("fill", "lightblue")
 				    	.attr("height", 40)
 				    	.attr("width", 75)
+				    	.style("z-index", 10)
 				    	.attr("class", function(d) {return d.name})
 				    	.attr("r", function(d) {return hashsize(d.velocity)})
-				    	.attr("cx", function(d) {return hashsize(d.velocity)})
-    					.attr("cy", function(d) {return hashsize(d.velocity)});
+				    	.attr("cx", function(d) {return (d.velocity + width/2)})
+    					.attr("cy", function(d) {return (d.velocity + height/2)});
 
-    				force
-     					.nodes(nodes)
-       					.start();
+					var text = svg.selectAll("text")
+					    .data(nodes)
+					    .enter()
+					    .append("text")
+					    .attr("text-anchor", "middle")
+					    .attr("font-size", 12)
+					    .attr("class", function(d){return d.name})
+					    .attr("x", function(d){return d.velocity + width/2})
+					    .attr("y", function(d){return d.velocity + height/2})
+					    .text(function(d){return d.name});
 
-					    //Need to set up nodes. (Copy from buzzmap).
 
-					    //Set up lines (Copy from d3 example).
+
+
 
 				}
 			}

@@ -67,7 +67,10 @@ Hashtag.prototype.find_or_create = function(name) {
 		deferred.resolve(true);
 	})
 
-	this.velocity = function(hash) {
+	return deferred.promise;
+};
+
+Hashtag.prototype.velocity = function(hash) {
 		//Make neo4J query
 		var neo4jquery = 'MATCH (h:Hashtag)-[:INCLUDES]->(t:Tweet) WHERE h.name = "' + hash + '" RETURN t.created_at ORDER BY t.created_at DESC LIMIT 20';
 		//Make a promise for when it's resolved;
@@ -90,9 +93,6 @@ Hashtag.prototype.find_or_create = function(name) {
 		  deferred.resolve(average(array));
 	  	});
 	  	return deferred.promise;
-	};
-
-	return deferred.promise;
 };
 	
 Hashtag.prototype.find = function(name) {
@@ -135,33 +135,42 @@ Hashtag.prototype.trackall = function() {
 };
 
 Hashtag.prototype.map = function(name) {
-var deferred = new Deferred;
-var velocity = this.velocity;
-var neo4jquery = "MATCH (h1:Hashtag)-[r:LINKED]->(h2:Hashtag) WHERE h1.name='" + name + "' RETURN h2,r ORDER BY r.count DESC LIMIT 20;" 
-db.cypherQuery(neo4jquery, function(err, result){
- 	if(err) throw err;
-  	var data = result.data.map(function(d) {return d.data});
-  	var map = [];
-  	for (var i = 0; i<data.length; i+=2) {
-  		map.push({hashtag: data[i], rel: data[i+1]});
-  	};
-  	async.each(map, 
-  		function(item, callback)
-  		{
-  			var promise =  velocity(item.hashtag.name);
-  			promise.then(function(v) {
-  				item.hashtag.velocity = v;
-  				callback();
-  			});
+	var deferred = new Deferred;
+	var velocity = this.velocity;
+	console.log(velocity);
 
-  		}, function (err) {
-  			if(err) console.log(err);
-  			console.log(JSON.stringify(map));
-  			deferred.resolve(map);
-  		}
-  	);
+	var neo4jquery = "MATCH (h1:Hashtag)-[r:LINKED]->(h2:Hashtag) WHERE h1.name='" + name + "' RETURN h2,r ORDER BY r.count DESC LIMIT 20;" 
+	db.cypherQuery(neo4jquery, function(err, result){
+	 	if(err) throw err;
+	  	var data = result.data.map(function(d) {return d.data});
+	  	var map = {about:
+	  		{
+	  			name: name,
+	  		},
+	  		nodes: [],
+	  		links: []
+	  	};
+	  	for (var i = 0; i<data.length; i+=2) {
+	  		map.nodes.push(data[i])
+	  		map.links.push({source: 0, target: i/2, strength: data[i+1]});
+	  	};
+	  	async.each(map.nodes, 
+	  		function(item, callback)
+	  		{
+	  			var promise =  velocity(item.name);
+	  			promise.then(function(v) {
+	  				item.velocity = v;
+	  				callback();
+	  			});
 
-});
+	  		}, function (err) {
+	  			if(err) throw(err);
+	  			console.log(JSON.stringify(map));
+	  			deferred.resolve(map);
+	  		}
+	  	);
+
+	});
 
   return deferred.promise;
 
@@ -204,3 +213,6 @@ Hashtag.prototype.list = function(name) {
 };
 
 module.exports = Hashtag;
+
+var test = new Hashtag;
+test.map('CES2014');
