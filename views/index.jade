@@ -1,14 +1,14 @@
 extends layout
 
 block content
-  div#signin
-    a(href="/auth/twitter") Sign in with Twitter to Make Your Own Maps
   div#index(ng-controller='index')
     h1= title
+    h2 {{'#' + about.name}}
+    buzzgraph
     h3 Top Authors
     div#authors(ng-repeat='author in authors')
       div.author @{{author.name}}
     h3 Top Tweets
     div#tweets(ng-repeat='tweet in tweets')
       div.tweet {{tweet.text}}
-    buzzgraph
+

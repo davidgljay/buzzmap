@@ -23,6 +23,10 @@ angular.module('d3Display', ['d3'])
 		            scope.render(scope.mapdata);
 		          });
 
+		        scope.$on('rerender', function() {
+		        	scope.render(scope.mapdata);
+		        });
+
 
 		        scope.render = function(data) {
 
@@ -35,15 +39,15 @@ angular.module('d3Display', ['d3'])
     				var margin = {top: 20, right: 20, bottom: 30, left: 50},
     				width = 960 - margin.left - margin.right,
     				height = 500 - margin.top - margin.bottom,
-    				charge = -300;
+    				charge = -3500;
 
 					var hashsize = d3.scale.linear()
-					.domain([0,50])
-				    .range([0, 20]);
+					.domain([0, d3.max(data.nodes, function(d) {return d.velocity})])
+				    .range([0, 50]);
 
 				    var linelength = d3.scale.linear()
 				    .domain([0,50])
-				    .range([0,40]);
+				    .range([0,400]);
 
 				    var nodes = [],
 				    links = [];
@@ -70,7 +74,7 @@ angular.module('d3Display', ['d3'])
         					.attr("y2", function(d) { return d.target.y; });
     					})
 				    .size([width, height])
-				    .charge(-800)
+				    .charge(charge)
 				    .start();
 
     				var link = svg.selectAll("line")
@@ -78,7 +82,7 @@ angular.module('d3Display', ['d3'])
   						.enter().append("line")
       					.attr("class", "link")
       					.style("stroke-width", "5")
-      					.style("stroke", "black");
+      					.style("stroke", "rgba(0, 0, 0, 0.25)");
 
 				    var circle = svg.selectAll("circle")
 				    	.data(nodes)

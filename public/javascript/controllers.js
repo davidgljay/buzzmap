@@ -3,11 +3,21 @@ app.controller('list', function ($scope) {
 
 });
 
-app.controller('index', function ($scope) {
-	$scope.stuff = 'things';
-	$scope.authors = [{name:'sally'}, {name:'sam'}];
-	$scope.tweets = [{text:'gametime'}, {text:'airplane time'}];
-	$scope.mapdata = {nodes: [{name:'stuff', velocity:20}, {name: 'things', velocity: 50}], links:[{source:0, target:1}, {source:1, target:0}]};
+app.controller('index', function ($scope, $http, $timeout) {
+
+	var checkinfo = function (hashtag) {
+			$http.get('/tags/' + hashtag ).success(function(res) {
+			console.log(res);
+			$scope.about = res.about;
+			$scope.mapdata = res;
+			$scope.$broadcast('rerender');
+		}).error(function(err) {
+			console.log(err);
+			throw err;
+		});
+	};
+
+	checkinfo('obama');
 
 });
 

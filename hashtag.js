@@ -13,7 +13,6 @@ var track = function(list) {
 	var stream = twitter.stream('statuses/filter', { track: list, language: 'en' })
 
 	stream.on('tweet', function (tweet) {
-	  console.log('Got tweet!');
 
 	  var clean = function (text) {
 	    text = text || '';
@@ -63,7 +62,7 @@ Hashtag.prototype.find_or_create = function(name) {
 	db.cypherQuery(neo4jquery, function(err, result) {
 		if (err) {console.log(err)};
 		console.log('Creating hashtag #' + name);
-		track(['#' + name]);
+		//track(['#' + name]);
 		deferred.resolve(true);
 	})
 
@@ -165,7 +164,7 @@ Hashtag.prototype.map = function(name) {
 
 	  		}, function (err) {
 	  			if(err) throw(err);
-	  			console.log(JSON.stringify(map));
+	  			if(err) throw(err);
 	  			deferred.resolve(map);
 	  		}
 	  	);
@@ -213,6 +212,3 @@ Hashtag.prototype.list = function(name) {
 };
 
 module.exports = Hashtag;
-
-var test = new Hashtag;
-test.map('CES2014');
